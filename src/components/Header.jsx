@@ -1,10 +1,14 @@
 import { Box, Button, Container, Input, Stack, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Categories from './Categories';
+import Cart from './cart/Cart';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+    const [cartDrawer, setCartDrawer] = useState(false)
+
     return (
         <>
             <Stack gap='20px'>
@@ -13,11 +17,12 @@ const Header = () => {
                         <Box display='flex' alignItems='center' justifyContent='space-between'>
                             <Box display='flex' width='100%' alignItems='center' gap='15px'>
                                 <Box fontSize="35px" width='140px'>
-                                    Shope
+                                   <Link to='/'>Shope</Link>
                                 </Box>
                                 <Box verticalAlign='center' padding='0 20px' borderRadius='3px' boxShadow='0 2px 4px 0 rgba(0,0,0,.23)' flex='1' width='100%' display='flex' alignItems='center' bgcolor='#fff'>
                                     <Input placeholder='Search Product' sx={{
                                         flex: '1',
+                                        padding: "6px 0",
                                         width: '100%',
                                         borderBottom: '0',
                                         '&::before, &::after': {
@@ -35,11 +40,11 @@ const Header = () => {
                                 </Box>
                                 <Box bgcolor="#fff" textAlign='center' borderRadius='3px' boxShadow='0 2px 4px 0 rgba(0,0,0,.23)'>
                                     <Button sx={{ fontWeight: 700, width: '100px' }}>
-                                        Login
+                                        <Link to='/login'>Login</Link>
                                     </Button>
                                 </Box>
                             </Box>
-                            <Box width='100px' textAlign='right' display='flex' alignItems='center' justifyContent='right' gap='8px'>
+                            <Box sx={{ cursor: "pointer" }} onClick={() => setCartDrawer(true)} width='100px' textAlign='right' display='flex' alignItems='center' justifyContent='right' gap='8px'>
                                 <ShoppingCartIcon sx={{ fill: '#fff' }} />
                                 <Typography>
                                     cart
@@ -50,6 +55,7 @@ const Header = () => {
                 </Box>
                 <Categories />
             </Stack>
+            <Cart cartDrawer={cartDrawer} setCartDrawer={setCartDrawer} />
         </>
     )
 }

@@ -2,6 +2,10 @@ import { Box, Container, Stack, Typography } from '@mui/material'
 import React from 'react'
 
 const Categories = () => {
+
+    //     const { data } = useCategoriesQuery()
+    // console.log(data)
+
     return (
         <>
             <Stack>

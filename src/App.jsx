@@ -1,16 +1,12 @@
 import './App.css'
-import Header from './components/Header'
-import Login from './pages/auth/Login'
-import Home from './pages/home/Home'
+import Routing from './routing/Routing';
+
 
 function App() {
 
   return (
     <>
-      <Header />
-      {/* <Home /> */}
-      {/* <Login /> */}
-      {/* <div>ecommerce</div> */}
+      <Routing/>
     </>
   )
 }

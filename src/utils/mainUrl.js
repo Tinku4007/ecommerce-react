@@ -1,4 +1,4 @@
 export const mainurl = {
-    HOST: "http://localhost:3000",
+    HOST: "https://fakestoreapi.com",
     // API_VERSION: "api/",
   };
