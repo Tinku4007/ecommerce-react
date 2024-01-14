@@ -9,9 +9,8 @@ const Home = () => {
   const dispatch = useDispatch();
 
   const addToCart = (item) => {
-    dispatch(setCart(item))
+    dispatch(setCart((prev) => prev + item))
   }
-  console.log(data)
 
   return (
     <>

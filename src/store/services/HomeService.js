@@ -26,10 +26,13 @@ export const HomeService = createApi({
                 url: '/auth/login',
                 body:userData
             })
+        }),
+        user:builder.query({
+            query:()=>'users/1'
         })
     }),
     
 })
 
-export const { useHomeDashboardQuery , useUserLoginMutation } = HomeService;
+export const { useHomeDashboardQuery , useUserLoginMutation , useUserQuery } = HomeService;
 export default HomeService

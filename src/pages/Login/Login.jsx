@@ -32,9 +32,8 @@ const Login = () => {
       } else {
         setSnackbarOpen(true);
         setSnackbarMessage('Success');
-        console.log(data)
         dispatch(setToken(data.token))
-        // dispatch(setUser(data.token))
+        navigaet('/admin/dashboard')
 
       }
     } catch (error) {
