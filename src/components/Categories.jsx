@@ -1,20 +1,21 @@
 import { Box, Container, Stack, Typography } from '@mui/material'
 import React from 'react'
+import { useCategoriesQuery } from '../store/services/HomeService'
 
 const Categories = () => {
 
-    //     const { data } = useCategoriesQuery()
-    // console.log(data)
+    const { data: categories } = useCategoriesQuery();
 
     return (
         <>
             <Stack>
                 <Container>
                     <Box display='flex' justifyContent='space-between' alignItems='center'>
-                        <Box textAlign='center' display='flex' flexDirection='column' alignItems='center' gap='8px' >
+                        <Box display='flex' flexDirection='column' alignItems='center' gap='8px' >
                             <img src="https://rukminim1.flixcart.com/fk-p-flap/64/64/image/64f1cc66052c66ef.png?q=100" alt="" />
                             <Typography sx={{ fontSize: '12px', fontWeight: 600 }} >
-                                Mobiles & Tablets
+                                {/* {categories} */}
+                                smartphones
                             </Typography>
                         </Box>
                         <Box textAlign='center' display='flex' flexDirection='column' alignItems='center' gap='8px' >

@@ -27,24 +27,28 @@ export const HomeService = createApi({
                 body: userData
             })
         }),
-        user: builder.query({
-            query: () => 'users/1'
+        categories: builder.query({
+            query: () => '/products/categories'
         }),
-        addToCart: builder.mutation({
-            query: (cartsData) => ({
+        addCart: builder.mutation({
+            query: (cart) => ({
                 method: 'POST',
-                url: `/carts/${id}`,
-                body: cartsData
+                url: '/carts/add',
+                body: cart
             })
         }),
-        fetchCards: builder.query({
-            query: () => `/carts`
+        getCartByUser: builder.query({
+            // query: (id) => `/carts/user/${id}`
+            query: (id) => `/carts/user/5`
         }),
-        // productGetById: builder.query({
-        //     query:()=>`/products/:${id}`
-        // })
     }),
 })
 
-export const { useHomeDashboardQuery, useUserLoginMutation, useUserQuery, useAddToCartMutation, useFetchCardsQuery  } = HomeService;
+export const {
+    useHomeDashboardQuery,
+    useCategoriesQuery,
+    useUserLoginMutation,
+    useAddCartMutation,
+    useGetCartByUserQuery
+} = HomeService;
 export default HomeService

@@ -29,7 +29,7 @@ const Header = () => {
                                 <Box fontSize="35px" width='140px'>
                                     <Link to='/'>Shope</Link>
                                 </Box>
-                                <Box verticalAlign='center' padding='0 20px' borderRadius='3px' boxShadow='0 2px 4px 0 rgba(0,0,0,.23)' flex='1' width='100%' display='flex' alignItems='center' bgcolor='#fff'>
+                                <Box  padding='0 20px' borderRadius='3px' boxShadow='0 2px 4px 0 rgba(0,0,0,.23)' flex='1' width='100%' display='flex' alignItems='center' bgcolor='#fff'>
                                     <Input placeholder='Search Product' sx={{
                                         flex: '1',
                                         padding: "6px 0",
@@ -44,7 +44,7 @@ const Header = () => {
                                     }}
                                         type='search'
                                     />
-                                    <Typography sx={{ verticalAlign: 'center', marginTop: '6px' }} >
+                                    <Typography sx={{  marginTop: '6px' }} >
                                         <SearchIcon width="20px" />
                                     </Typography>
                                 </Box>

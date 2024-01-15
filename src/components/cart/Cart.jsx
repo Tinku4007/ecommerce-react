@@ -3,14 +3,14 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import RemoveIcon from '@mui/icons-material/Remove';
 import AddIcon from '@mui/icons-material/Add';
-import { useFetchCardsQuery } from '../../store/services/HomeService';
+import { useGetCartByUserQuery } from '../../store/services/HomeService';
 
 const Cart = ({ cartDrawer, setCartDrawer }) => {
-  // const cartItems = useSelector((state) => state.cart)
   const [add, setAdd] = useState(0)
-  const { data: cardItem } = useFetchCardsQuery()
-  // console.log(cardItem, 'cart add to card')
-  console.log(cardItem , 'product with id')
+  const addToCart = useSelector((state) => state.addToCart.cart)
+  const { data:getCart } = useGetCartByUserQuery()
+  console.log(getCart)
+
 
   const decreament = () => {
     setAdd((prev) => prev - 1)

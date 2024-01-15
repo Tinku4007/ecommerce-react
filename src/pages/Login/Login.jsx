@@ -33,8 +33,8 @@ const Login = () => {
         setSnackbarOpen(true);
         setSnackbarMessage('Success');
         dispatch(setToken(data.token))
+        dispatch(setUser(data))
         navigaet('/admin/dashboard')
-
       }
     } catch (error) {
       console.log(error)
@@ -60,15 +60,15 @@ const Login = () => {
             <div className='flex flex-col gap-y-4'>
               <div>
                 <p className='text-md font-medium' >Email or mobile phone number</p>
-                <input className='border outline-none box-shadow-inset rounded-md p-2 w-full' type="text" id='email' placeholder='John@gmail.com' defaultValue='' {...register('email')} />
+                <input className='border outline-none box-shadow-inset rounded-md p-2 w-full' type="text" id='email' placeholder='John@gmail.com' {...register('email')} />
                 <p>{errors.email?.message}</p>
               </div>
               <div>
                 <p className='text-md font-medium' >Password</p>
-                <input className='border outline-none box-shadow-inset rounded-md p-2 w-full' type="text" id='password' placeholder='m38rmF$' defaultValue='' {...register('password')} />
+                <input className='border outline-none box-shadow-inset rounded-md p-2 w-full' type="text" id='password' placeholder='m38rmF$' {...register('password')} />
                 <p>{errors.password?.message}</p>
               </div>
-              <input className='w-full p-2 text-sm bg-[#FFD814] rounded-lg' type="submit" value="continue" />
+              <input className='w-full p-2 text-sm bg-[#FFD814] rounded-lg' type="submit" />
               <p className='text-xs'>By continuing, you agree to Amazon's Conditions of Use and Privacy Notice.   </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ const Login = () => {
           <div className='w-4/12  h-[1px] bg-black'></div>
         </div>
         <div>
-          <input className='rounded-lg outline-none box-shadow-input_outset w-full p-2 text-center border' type='submit value' value="Create your Amazon account" />
+          <input className='rounded-lg outline-none box-shadow-input_outset w-full p-2 text-center border' type='submit value'  />
         </div>
       </div>
       <Toaster open={snackbarOpen} onClose={closeSnackbar} message={snackbarMessage} />
