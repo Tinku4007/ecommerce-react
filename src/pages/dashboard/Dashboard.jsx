@@ -7,9 +7,11 @@ import Home from '../home/Home'
 
 
 const Dashboard = () => {
-  const {data} = useUserQuery()
+  const {data:user} = useUserQuery()
   const dispatch = useDispatch()
-  dispatch(setUser(data))
+  useEffect(()=>{
+    dispatch(setUser(user))
+  })
 
   return (
     <>

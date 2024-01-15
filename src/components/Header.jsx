@@ -9,15 +9,14 @@ import { useSelector } from 'react-redux';
 import { clearLocalStorage } from '../utils/LocalstorageUtils';
 
 const Header = () => {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const [cartDrawer, setCartDrawer] = useState(false)
     const data = useSelector((state) => state.auth.user)
 
     
     const Logout = ()=>{
-        clearLocalStorage('accessToken')
-        clearLocalStorage('user')
-        navigate('/')
+        localStorage.clear()
+        window.location('/auth/home')  
     }
 
     return (

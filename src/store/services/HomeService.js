@@ -5,34 +5,46 @@ export const HomeService = createApi({
     baseQuery: fetchBaseQuery({
         // reducerPath:"api",   
         baseUrl: mainurl.HOST,
-        prepareHeaders:(Headers , {getState})=>{
+        prepareHeaders: (Header, { getState }) => {
             try {
                 const token = getState().auth.token
-                if(token){
-                    Headers.set('authorization', `Bearer ${token}`)
+                if (token) {
+                    Header.set('authorization', `Bearer ${token}`)
                 }
             } catch (error) {
-                
+
             }
         }
     }),
     endpoints: (builder) => ({
         homeDashboard: builder.query({
-            query:()=>'/products',
+            query: () => '/products',
         }),
-        userLogin:builder.mutation({
-            query:(userData)=>({
-                method:'POST',
+        userLogin: builder.mutation({
+            query: (userData) => ({
+                method: 'POST',
                 url: '/auth/login',
-                body:userData
+                body: userData
             })
         }),
-        user:builder.query({
-            query:()=>'users/1'
-        })
+        user: builder.query({
+            query: () => 'users/1'
+        }),
+        addToCart: builder.mutation({
+            query: (cartsData) => ({
+                method: 'POST',
+                url: `/carts/${id}`,
+                body: cartsData
+            })
+        }),
+        fetchCards: builder.query({
+            query: () => `/carts`
+        }),
+        // productGetById: builder.query({
+        //     query:()=>`/products/:${id}`
+        // })
     }),
-    
 })
 
-export const { useHomeDashboardQuery , useUserLoginMutation , useUserQuery } = HomeService;
+export const { useHomeDashboardQuery, useUserLoginMutation, useUserQuery, useAddToCartMutation, useFetchCardsQuery  } = HomeService;
 export default HomeService
