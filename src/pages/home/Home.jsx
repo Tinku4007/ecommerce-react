@@ -2,37 +2,40 @@ import React, { useEffect, useState } from 'react';
 import { useAddCartMutation, useHomeDashboardQuery } from '../../store/services/HomeService';
 import { Box, Button, Rating, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCart } from '../../store/slice/HomeSlice';
-import { getLocalStorage } from '../../utils/LocalstorageUtils';
+import { setCart, setProduct } from '../../store/slice/HomeSlice';
 
 const Home = () => {
   const { data: Allproduct } = useHomeDashboardQuery();
-  const [cart] = useAddCartMutation()
   const dispatch = useDispatch()
+  const [cart] = useAddCartMutation()
+  const [addCart, setAddCart] = useState([])
+  const Product = useSelector((state) => state.addToCart.product)
 
-  const handleCart = async (item) => {
-    const userid = getLocalStorage("user")
-    const id = userid?.id
-    const cardDetails = {
-      userId: id,
-      products: [{ id: item?.id, quantity: 1, }]
-    }
-
-    const { data, error } = await cart(cardDetails)
-    if (error) {
-      console.log(error)
+  const handleCart = (item) => {
+    let newCart = JSON.parse(JSON.stringify(addCart));
+    const final = newCart.find((value) => value?.id === item?.id);
+    if (final) {
+      final.qty += 1;
     } else {
-      alert('success')
+      newCart.push({ ...item, qty: 1 });
     }
 
-    dispatch(setCart(data))
+    setAddCart(newCart);
+    dispatch(setCart(newCart));
+  };
 
-  }
+  useEffect(() => {
+    dispatch(setProduct(Allproduct));
+  }, [dispatch, Allproduct]);
+
+
+
+
 
   return (
     <>
       <Box display="flex" flexWrap="wrap" gap="15px" justifyContent="space-between">
-        {Allproduct?.products?.map((item) => (
+        {Product?.products?.map((item) => (
           <Box key={item?.id} width="32%" border="1px solid #ccc" borderRadius="10px">
             <Box display="flex" flexDirection="column" gap="15px">
               <Box width="100%">
