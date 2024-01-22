@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCart, setProduct } from '../../store/slice/HomeSlice';
 
 const Home = () => {
-  const { data: Allproduct } = useHomeDashboardQuery();
+  const { data: Allproduct , isSuccess , isLoading , isError} = useHomeDashboardQuery();
   const dispatch = useDispatch()
   const [cart] = useAddCartMutation()
   const [addCart, setAddCart] = useState([])
@@ -25,16 +25,17 @@ const Home = () => {
   };
 
   useEffect(() => {
-    dispatch(setProduct(Allproduct));
+    if(isSuccess){
+      dispatch(setProduct(Allproduct));
+    }
   }, [dispatch, Allproduct]);
-
-
-
 
 
   return (
     <>
       <Box display="flex" flexWrap="wrap" gap="15px" justifyContent="space-between">
+        {isLoading && <h1>lodaing...</h1> }
+        {isError && <h1>error fatching data ...</h1> }
         {Product?.products?.map((item) => (
           <Box key={item?.id} width="32%" border="1px solid #ccc" borderRadius="10px">
             <Box display="flex" flexDirection="column" gap="15px">
