@@ -12,11 +12,12 @@ const Header = () => {
     // const navigate = useNavigate()
     const [cartDrawer, setCartDrawer] = useState(false)
     const data = useSelector((state) => state.auth.user)
+    const cartLength = useSelector((state) => state.addToCart.cart)
 
-    
-    const Logout = ()=>{
+
+    const Logout = () => {
         localStorage.clear()
-        window.location('/auth/home')  
+        window.location('/auth/home')
     }
 
     return (
@@ -29,7 +30,7 @@ const Header = () => {
                                 <Box fontSize="35px" width='140px'>
                                     <Link to='/'>Shope</Link>
                                 </Box>
-                                <Box  padding='0 20px' borderRadius='3px' boxShadow='0 2px 4px 0 rgba(0,0,0,.23)' flex='1' width='100%' display='flex' alignItems='center' bgcolor='#fff'>
+                                <Box padding='0 20px' borderRadius='3px' boxShadow='0 2px 4px 0 rgba(0,0,0,.23)' flex='1' width='100%' display='flex' alignItems='center' bgcolor='#fff'>
                                     <Input placeholder='Search Product' sx={{
                                         flex: '1',
                                         padding: "6px 0",
@@ -44,18 +45,25 @@ const Header = () => {
                                     }}
                                         type='search'
                                     />
-                                    <Typography sx={{  marginTop: '6px' }} >
+                                    <Typography sx={{ marginTop: '6px' }} >
                                         <SearchIcon width="20px" />
                                     </Typography>
                                 </Box>
                                 <Box bgcolor="#fff" textAlign='center' borderRadius='3px' boxShadow='0 2px 4px 0 rgba(0,0,0,.23)'>
                                     <Button sx={{ fontWeight: 700, width: '100px' }}>
-                                       {data ? <Link onClick={Logout}>Logout</Link> :  <Link to='/auth/login'>Login</Link> }
+                                        {data ? <Link onClick={Logout}>Logout</Link> : <Link to='/auth/login'>Login</Link>}
                                     </Button>
                                 </Box>
                             </Box>
                             <Box sx={{ cursor: "pointer" }} onClick={() => setCartDrawer(true)} width='100px' textAlign='right' display='flex' alignItems='center' justifyContent='right' gap='8px'>
-                                <ShoppingCartIcon sx={{ fill: '#fff' }} />
+                                <Box position='relative'>
+                                       {cartLength?.length > 0 ? <Typography bgcolor='#f1f2f4' padding='2px 7px' fontSize='10px' borderRadius='50%' position="absolute" top='-12px' left='3px'>
+                                        {cartLength?.length}
+                                    </Typography>
+                                    : null
+                                    }
+                                    <ShoppingCartIcon sx={{ fill: '#fff' }} />
+                                </Box>
                                 <Typography>
                                     cart
                                 </Typography>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useAddCartMutation, useHomeDashboardQuery } from '../../store/services/HomeService';
 import { Box, Button, Rating, Stack, Typography } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,8 @@ const Home = () => {
   const [cart] = useAddCartMutation()
   const [addCart, setAddCart] = useState([])
   const Product = useSelector((state) => state.addToCart.product)
+  const cartLength = useSelector((state) => state.addToCart.cart)
+  const [productId, setProductId] = useState('')
 
   const handleCart = (item) => {
     let newCart = JSON.parse(JSON.stringify(addCart));
@@ -20,9 +22,11 @@ const Home = () => {
       newCart.push({ ...item, qty: 1 });
     }
 
+    setProductId(final?.id);
     setAddCart(newCart);
     dispatch(setCart(newCart));
   };
+
 
   useEffect(() => {
     dispatch(setProduct(Allproduct));
@@ -30,13 +34,11 @@ const Home = () => {
 
 
 
-
-
   return (
     <>
       <Box display="flex" flexWrap="wrap" gap="15px" justifyContent="space-between">
-        {Product?.products?.map((item) => (
-          <Box key={item?.id} width="32%" border="1px solid #ccc" borderRadius="10px">
+        {Product?.products?.map((item, index) => (
+          <Box key={index} width="32%" border="1px solid #ccc" borderRadius="10px">
             <Box display="flex" flexDirection="column" gap="15px">
               <Box width="100%">
                 <img className='h-[194px] object-fill w-full rounded-t-[10px]' src={item?.thumbnail} alt="" />
