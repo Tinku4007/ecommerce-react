@@ -1,18 +1,27 @@
 import { Box, Button, Container, Input, Stack, Typography } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Categories from './Categories';
 import Cart from './cart/Cart';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { clearLocalStorage } from '../utils/LocalstorageUtils';
+import { useGetUsersQuery } from '../store/services/HomeService';
 
 const Header = () => {
     // const navigate = useNavigate()
     const [cartDrawer, setCartDrawer] = useState(false)
     const data = useSelector((state) => state.auth.user)
     const cartLength = useSelector((state) => state.addToCart.cart)
+    const inputRef = useRef()
+
+    const [search, setSearch] = useState('');
+
+    const { data: test } = useGetUsersQuery(search)
+    
+    useState(()=>{
+        // setTinku(inputRef.current.value)
+    },[])
 
 
     const Logout = () => {
@@ -43,7 +52,7 @@ const Header = () => {
                                             display: 'none'
                                         },
                                     }}
-                                        type='search'
+                                       onChange={(e)=>setSearch(e.target.value)} type='search'
                                     />
                                     <Typography sx={{ marginTop: '6px' }} >
                                         <SearchIcon width="20px" />
@@ -57,10 +66,10 @@ const Header = () => {
                             </Box>
                             <Box sx={{ cursor: "pointer" }} onClick={() => setCartDrawer(true)} width='100px' textAlign='right' display='flex' alignItems='center' justifyContent='right' gap='8px'>
                                 <Box position='relative'>
-                                       {cartLength?.length > 0 ? <Typography bgcolor='#f1f2f4' padding='2px 7px' fontSize='10px' borderRadius='50%' position="absolute" top='-12px' left='3px'>
+                                    {cartLength?.length > 0 ? <Typography bgcolor='#f1f2f4' padding='2px 7px' fontSize='10px' borderRadius='50%' position="absolute" top='-12px' left='3px'>
                                         {cartLength?.length}
                                     </Typography>
-                                    : null
+                                        : null
                                     }
                                     <ShoppingCartIcon sx={{ fill: '#fff' }} />
                                 </Box>
